@@ -1,0 +1,1 @@
+export const colors = ["bg-pink", "bg-blue", "bg-orange", "bg-blue", "bg-orange", "bg-pink"]
