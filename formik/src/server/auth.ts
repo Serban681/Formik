@@ -4,7 +4,7 @@ import GithubProvider from 'next-auth/providers/github';
 import clientPromise from "./db"
 import dbConnect from './dbConnect';
 
-await dbConnect()
+dbConnect()
 
 export const authOptions: NextAuthOptions = {
   providers: [

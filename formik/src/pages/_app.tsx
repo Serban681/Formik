@@ -7,6 +7,8 @@ import { api } from "@/utils/api";
 
 import "@/styles/globals.css";
 import { useRouter } from "next/router";
+import Avatar from "@/components/Avatar";
+import { useState } from "react";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -16,6 +18,16 @@ const MyApp: AppType<{ session: Session | null }> = ({
 
   const logoClick = (): void => {
     router.push('/').catch((err) => console.log(err))
+  }
+
+  const [isPanelOpened, setIsPanelOpened] = useState(false);
+
+  const openPanel = () => {
+    setIsPanelOpened(true)
+  }
+
+  const closePanel = () => {
+    setIsPanelOpened(false)
   }
 
   return (
@@ -30,7 +42,8 @@ const MyApp: AppType<{ session: Session | null }> = ({
             <h1 onClick={logoClick} className="relative font-logo text-black text-4xl mb-10 cursor-pointer">
               Formik
               <div className="w-12 h-3 bg-yellow absolute bottom-1 right-[-0.5rem] z-[-1]"/>
-            </h1>            
+            </h1>          
+            <Avatar openPanel={openPanel} />  
             <div className="w-11/12 flex justify-center my-auto">
               <Component {...pageProps} /> 
             </div>
