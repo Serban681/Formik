@@ -1,6 +1,8 @@
 import { type AppType } from "next/dist/shared/lib/utils";
 import Head from "next/head";
 
+import { api } from "@/utils/api";
+
 import "@/styles/globals.css";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
@@ -29,4 +31,4 @@ const MyApp: AppType = ({ Component, pageProps }) => {
   );
 };
 
-export default MyApp;
+export default api.withTRPC(MyApp);
