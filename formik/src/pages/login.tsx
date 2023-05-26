@@ -18,29 +18,29 @@ import { toast } from "react-toastify";
 import { api } from "@/utils/api"
 
 export default function LoginPage() {
-    const { data: session } = useSession()
-    const router = useRouter()
+    // const { data: session } = useSession()
+    // const router = useRouter()
 
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
+    // const [username, setUsername] = useState('')
+    // const [password, setPassword] = useState('')
 
-    const changeUsername = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setUsername(e.target.value)
-    }
+    // const changeUsername = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     setUsername(e.target.value)
+    // }
 
-    const changePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setPassword(e.target.value)
-    }
+    // const changePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     setPassword(e.target.value)
+    // }
 
-    const loginWithGithub = async () => {
-        await signIn('github')
-    }
+    // const loginWithGithub = async () => {
+    //     await signIn('github')
+    // }
 
-    const login = api.credentialAuthController.logIn.useMutation()
+    // const login = api.credentialAuthController.logIn.useMutation()
 
-    const handleSubmit = () => {
-        login.mutate({ username, password })
-    }
+    // const handleSubmit = () => {
+    //     login.mutate({ username, password })
+    // }
 
     // const handleSubmit = () => {
     //     if(username === '') {
