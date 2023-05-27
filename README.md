@@ -1,4 +1,4 @@
-﻿# Formik_Client
+﻿# Formik
 
 How to run:  
   copy environment variables from .env.example  
