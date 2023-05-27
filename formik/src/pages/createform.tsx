@@ -10,8 +10,11 @@ import useBlockRoute from "@/utils/useBlockRoute"
 import { api } from "@/utils/api"
 
 import { useSession } from "next-auth/react"
+import { useRouter } from "next/router"
 
 const CreateFormPage = () => {
+    const router = useRouter()
+
     useBlockRoute()
 
     const { data: session } = useSession()
@@ -66,6 +69,8 @@ const CreateFormPage = () => {
         if(session && session.user) {
             createFormMutation.mutate({...form, isDraft: false, creator: session.user.email!})
         }
+
+        router.push('/dashboard')
     }
 
     const saveDraft = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -73,6 +78,8 @@ const CreateFormPage = () => {
         if(session && session.user) {
             createFormMutation.mutate({...form, isDraft: true, creator: session.user.email!})
         }
+
+        router.push('/dashboard')
     }
 
     return (
