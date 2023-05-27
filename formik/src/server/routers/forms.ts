@@ -6,6 +6,7 @@ import { z } from 'zod';
 import { Form } from '@/utils/dataStructures';
 
 import mongoose from 'mongoose';
+import FormAnswers from "@/server/models/FormAnswers";
 
 const Form = mongoose.model('Form')
 
@@ -122,6 +123,17 @@ export const forms = router({
 
                     await form.save()
                 }
+            } catch(err) {
+                console.log(err)
+            }
+        }),
+
+    deleteForm: publicProcedure
+        .input(z.string())
+        .mutation(async (opts: { input: any; }) => {
+            try {
+                await Form.findByIdAndDelete(opts.input)
+                await FormAnswers.deleteMany({ formId: opts.input })
             } catch(err) {
                 console.log(err)
             }
