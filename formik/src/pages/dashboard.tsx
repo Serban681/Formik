@@ -25,6 +25,8 @@ const Dashboard: NextPage = () => {
     const getDrafts = api.forms.getDraftForms.useQuery(session && session.user && session.user.email || '')
     const getCreatedForms = api.forms.getCreatedForms.useQuery(session && session.user && session.user.email || '')
 
+    const deleteFormMutation = api.forms.deleteForm.useMutation()
+
     useEffect(() => {
         if(getDrafts.data)
           setDrafts(getDrafts.data)
@@ -36,6 +38,17 @@ const Dashboard: NextPage = () => {
     router.push('/createform').catch((err) => console.log(err))
   }
 
+  const deleteForm = (_id: string, isDraft: boolean) => {
+    if(_id) {
+        deleteFormMutation.mutate(_id)
+        if(isDraft) {
+          setDrafts(drafts.filter((form) => form._id !== _id))
+        } else {
+          setCreatedForms(createdForms.filter((form) => form._id !== _id))
+        }
+    }
+  }
+
   return (
     <main className="ml-16 min-h-screen">
         {
@@ -45,7 +58,7 @@ const Dashboard: NextPage = () => {
                   <div className="mt-10 flex flex-col md:flex-row md:w-[75rem] md:flex-wrap">
                       {drafts.map((form: Form, i: number) => (
                           <div key={i} className="mr-20">
-                              <CreatedFormCard index={i} form={form} />
+                              <CreatedFormCard index={i} form={form} deleteForm={deleteForm} />
                           </div>
                       ))}
                   </div>
@@ -58,7 +71,7 @@ const Dashboard: NextPage = () => {
             <div className="mt-10 flex flex-col md:flex-row md:w-[75rem] md:flex-wrap">
             {createdForms.map((form: Form, i: number) => (
                   <div key={i} className="mr-20">
-                    <CreatedFormCard index={i} form={form} />
+                    <CreatedFormCard index={i} form={form} deleteForm={deleteForm} />
                   </div>
                 )
             )}
