@@ -11,7 +11,7 @@ const CreatedFormCard = ({form, index}:{form: Form, index: number}) => {
     const router = useRouter();
 
     const goToFormCreatorPage =  () => {
-         router.push(`/updateform/${form._id}`).catch((err) => console.log(err));
+        router.push(`/updateform/${form._id}`).catch((err) => console.log(err));
     }
 
     const goToResultsPage = () => {
