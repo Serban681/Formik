@@ -9,10 +9,8 @@ import {useRouter} from "next/router";
 import { api } from "@/utils/api";
 import trash_icon from "@/images/trash_icon.svg";
 
-const CreatedFormCard = ({form, index}:{form: Form, index: number}) => {
+const CreatedFormCard = ({form, index, deleteForm}:{form: Form, index: number, deleteForm: (id: string, isDraft: boolean) => void}) => {
     const router = useRouter();
-
-    const deleteFormMutation = api.forms.deleteForm.useMutation();
 
     const goToFormCreatorPage =  () => {
         router.push(`/updateform/${form._id}`).catch((err) => console.log(err));
@@ -20,11 +18,6 @@ const CreatedFormCard = ({form, index}:{form: Form, index: number}) => {
 
     const goToResultsPage = () => {
         router.push(`/formresults/${form._id || ''}`).catch((err) => console.log(err));
-    }
-
-    const deleteForm = () => {
-        if(form._id)
-            deleteFormMutation.mutate(form._id)
     }
 
     return (
@@ -37,7 +30,7 @@ const CreatedFormCard = ({form, index}:{form: Form, index: number}) => {
                 />
             </div>
 
-            <div onClick={deleteForm} className="absolute top-5 right-5 hover:scale-110 transition-all cursor-pointer">
+            <div onClick={() => deleteForm(form._id!, form.isDraft)} className="absolute top-5 right-5 hover:scale-110 transition-all cursor-pointer">
                 <Image
                     src={trash_icon}
                     alt={"delete icon"}
