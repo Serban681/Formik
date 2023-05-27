@@ -1,8 +1,8 @@
 ﻿# Formik_Client
 
-How to run: 
-  copy environment variables from .env.example 
-Replace the  "MONGODB_URI" link with the following: 
+How to run:  
+  copy environment variables from .env.example  
+Replace the  "MONGODB_URI" link with the following:  
 
 You might want to create a mongodb cluster to test the application.  
 Go to https://account.mongodb.com/account/login. Sign in with google or github. 
