@@ -42,40 +42,43 @@ export const forms = router({
         }),
     getCreatedForms: publicProcedure
         .input(z.string())
-        .output(z.array(z.object({
-            title: z.string(),
-            fields: z.array(
-                z.object({
-                    type: z.string(),
-                    question: z.string(),
-                    options: z.array(
-                        z.object({
-                            answer: z.string()
-                        }))
-                })),
-            isDraft: z.boolean(),
-            creator: z.string()
-        })))
+        // .output(z.array(z.object({
+        //     _id: z.string(),
+        //     title: z.string(),
+        //     fields: z.array(
+        //         z.object({
+        //             type: z.string(),
+        //             question: z.string(),
+        //             options: z.array(
+        //                 z.object({
+        //                     answer: z.string()
+        //                 }))
+        //         })),
+        //     isDraft: z.boolean(),
+        //     creator: z.string()
+        // })))
         .query(async (opts: { input: string; }) => {
             const forms: Form[] = await Form.find({ isDraft: false, creator: opts.input })
             return forms
         }),
     getDraftForms: publicProcedure
         .input(z.string())
-        .output(z.array(z.object({
-            title: z.string(),
-            fields: z.array(
-                z.object({
-                    type: z.string(),
-                    question: z.string(),
-                    options: z.array(
-                        z.object({
-                            answer: z.string()
-                        }))
-                })),
-            isDraft: z.boolean(),
-            creator: z.string()
-        })))
+        // .output(z.array(z.object({
+        //     _id: z.string(),
+        //     title: z.string(),
+        //     fields: z.array(
+        //         z.object({
+        //             _id: z.string(),
+        //             type: z.string(),
+        //             question: z.string(),
+        //             options: z.array(
+        //                 z.object({
+        //                     answer: z.string()
+        //                 }))
+        //         })),
+        //     isDraft: z.boolean(),
+        //     creator: z.string()
+        // })))
         .query(async (opts: { input: string; }) => {
             const forms: Form[] = await Form.find({ isDraft: true, creator: opts.input })
             if (!forms.length) return []
@@ -84,9 +87,9 @@ export const forms = router({
     getForm: publicProcedure
         .input(z.string())
         .query(async (opts: { input: string; }) => {
-            if(!opts.input) return {}
+            if(!opts.input) return null
             const form:Form | null = await Form.findById(opts.input)
-            if(!form) return {}
+            if(!form) return null
             return form
         }),
     updateForm: publicProcedure

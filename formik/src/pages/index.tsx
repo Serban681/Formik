@@ -12,7 +12,7 @@ const Home: NextPage = () => {
   const router = useRouter();
 
   const handleClick = () => {
-    router.push('/dashboard').catch((err) => console.log(err));
+    router.push('/signup').catch((err) => console.log(err));
   }
 
   return (

@@ -1,3 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { publicProcedure, router } from '../trpc';
 import { z } from 'zod';
 
@@ -5,7 +10,7 @@ import mongoose from 'mongoose';
 
 const FormAnswers = mongoose.model('FormAnswers')
 
-export const forms = router({
+export const answers = router({
     submitAnswer: publicProcedure
         .input(z.object({
             formId: z.string(),

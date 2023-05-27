@@ -1,3 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-misused-promises */
+/* eslint-disable @typescript-eslint/await-thenable */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* @typescript-eslint/no-unused-vars */
@@ -151,13 +154,13 @@ const PreviewForm = ({form}: {form: Form}) => {
                     return <TextFieldPreview key={index} question={field.question} />
                 }
                 else if(field.type === 'dropdown') {
-                    return <DropdownFieldPreview key={index} question={field.question} options={field.options!} />
+                    return <DropdownFieldPreview key={index} question={field.question} options={field.options} />
                 }
                 else if(field.type === 'radio') {
-                    return <RadioFieldPreview key={index} question={field.question} options={field.options!} />
+                    return <RadioFieldPreview key={index} question={field.question} options={field.options} />
                 }
                 else {
-                    return <CheckboxFieldPreview key={index} question={field.question} options={field.options!} />
+                    return <CheckboxFieldPreview key={index} question={field.question} options={field.options} />
                 }
             })}
 
