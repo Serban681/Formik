@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
@@ -6,9 +7,9 @@ import { z } from 'zod';
 import { Form } from '@/utils/dataStructures';
 
 import mongoose from 'mongoose';
-import FormAnswers from "@/server/models/FormAnswers";
 
 const Form = mongoose.model('Form')
+const FormAnswers = mongoose.model('FormAnswers')
 
 export const forms = router({
     createForm: publicProcedure
@@ -26,7 +27,7 @@ export const forms = router({
             isDraft: z.boolean(),
             creator: z.string()
         }))
-        .mutation(async (opts: { input: Form }) => {
+        .mutation(async (opts: { input: any; }) => {
             try {
                 const { input } = opts
             
@@ -127,7 +128,6 @@ export const forms = router({
                 console.log(err)
             }
         }),
-
     deleteForm: publicProcedure
         .input(z.string())
         .mutation(async (opts: { input: any; }) => {

@@ -97,7 +97,7 @@ export default function UpdateFormPage() {
 
     return (
         <main>
-            <SectionTitle>Create a Form</SectionTitle>
+            <SectionTitle>Update Form</SectionTitle>
             <div className="flex justify-between mt-5">
                 <div>
                     <form>
