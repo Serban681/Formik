@@ -16,10 +16,10 @@ When the cluster is created click "Connect" and choose "MongoDB for VS Code". Co
   
 Run "npm install" to install the necesary dependecies and "npm run dev" to run the application.  
 
-Technologies used: 
-  -Next.js 
-  -MongoDb 
-  -Next Auth 
-  -Typescript 
-  -trpc (for data fetching) 
-  -zod (for data validation) 
+Technologies used:  
+  -Next.js  
+  -MongoDb  
+  -Next Auth  
+  -Typescript  
+  -trpc (for data fetching)  
+  -zod (for data validation)  
