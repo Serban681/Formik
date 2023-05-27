@@ -21,6 +21,6 @@ Technologies used:
   -MongoDb  
   -Next Auth  
   -Typescript  
-  -tailwindcss
+  -tailwindcss  
   -trpc (for data fetching)  
   -zod (for data validation)  
