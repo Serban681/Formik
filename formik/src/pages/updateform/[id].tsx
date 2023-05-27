@@ -97,49 +97,56 @@ export default function UpdateFormPage() {
 
     return (
         <main>
-            <SectionTitle>Update Form</SectionTitle>
-            <div className="flex justify-between mt-5">
-                <div>
-                    <form>
-                        <label className="text-2xl mt-1 block" htmlFor="title">
-                            Title
-                            <input value={form.title} onChange={(e) => setForm({...form, title: e.target.value})} className="border-black border-[2px] block text-sm p-1.5 w-64 focus:outline-none" placeholder="ex: Lesson Feedback" type="text" name="title" />
-                        </label>
+            {
+                updateFormMutation.isLoading ? 
+                    <></>
+                :
+                    <>
+                        <SectionTitle>Update Form</SectionTitle>
+                        <div className="flex justify-between mt-5">
+                            <div>
+                                <form>
+                                    <label className="text-2xl mt-1 block" htmlFor="title">
+                                        Title
+                                        <input value={form.title} onChange={(e) => setForm({...form, title: e.target.value})} className="border-black border-[2px] block text-sm p-1.5 w-64 focus:outline-none" placeholder="ex: Lesson Feedback" type="text" name="title" />
+                                    </label>
 
-                        {form?.fields?.map((field, index) => {
-                            if(field.type === 'text') {
-                                return <TextField key={index} questionId={index} handleChange={handleChange} form={form} removeField={removeField} />
-                            } else {
-                                return <FixedAnswerField key={index} type={field.type} questionId={index} handleChange={handleChange} addOptions={addOptions} form={form} removeField={removeField} />
-                            }
-                        })}
+                                    {form?.fields?.map((field, index) => {
+                                        if(field.type === 'text') {
+                                            return <TextField key={index} questionId={index} handleChange={handleChange} form={form} removeField={removeField} />
+                                        } else {
+                                            return <FixedAnswerField key={index} type={field.type} questionId={index} handleChange={handleChange} addOptions={addOptions} form={form} removeField={removeField} />
+                                        }
+                                    })}
 
-                        <label className="text-2xl mt-3 block" htmlFor="title">
-                            Add Question
-                            <br />
-                            <select value={fieldTypeToAdd} onChange={(e) => setFieldTypeToAdd(e.target.value)} className="border-black border-[2px] bg-white text-sm p-1.5 w-64 focus:outline-none" name="title">
-                                <option value="text">Text</option>
-                                <option value="dropdown">Dropdown</option>
-                                <option value="radio">Radio</option>
-                                <option value="checkbox">Checkbox</option>
-                            </select>
-                            <AddButton handleClick={addField}/>
-                        </label>
+                                    <label className="text-2xl mt-3 block" htmlFor="title">
+                                        Add Question
+                                        <br />
+                                        <select value={fieldTypeToAdd} onChange={(e) => setFieldTypeToAdd(e.target.value)} className="border-black border-[2px] bg-white text-sm p-1.5 w-64 focus:outline-none" name="title">
+                                            <option value="text">Text</option>
+                                            <option value="dropdown">Dropdown</option>
+                                            <option value="radio">Radio</option>
+                                            <option value="checkbox">Checkbox</option>
+                                        </select>
+                                        <AddButton handleClick={addField}/>
+                                    </label>
 
-                        <div className="mt-8">
-                            <Btn handleClick={createForm}>Submit</Btn>
+                                    <div className="mt-8">
+                                        <Btn handleClick={createForm}>Submit</Btn>
+                                    </div>
+
+                                    <div className="mt-6">
+                                        <Btn index={1} handleClick={saveDraft}>Save Draft</Btn>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div className="ml-96 hidden md:block">
+                                <PreviewForm form={form} />
+                            </div>
                         </div>
-
-                        <div className="mt-6">
-                            <Btn index={1} handleClick={saveDraft}>Save Draft</Btn>
-                        </div>
-                    </form>
-                </div>
-
-                <div className="ml-96 hidden md:block">
-                    <PreviewForm form={form} />
-                </div>
-            </div>
+                    </>
+            }
         </main>
     )
 }

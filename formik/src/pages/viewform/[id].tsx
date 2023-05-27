@@ -88,35 +88,43 @@ export default function ViewForm() {
     return (
         <main>
             {
-                localStorageAvailable && localStorage.getItem(formId) ? 
-                    <h3>Thanks for submitting your answer</h3>
-                    :
-                    (
-                        <>
-                            <SectionTitle>{form.title}</SectionTitle>
-                            <div className="mt-7">
-                                {form.fields.length && form?.fields?.map((field, index) => {
-                                    if(field.type === 'text') {
-                                        return <TextField key={index} id={index} answers={answers} handleChange={handleAnswerChange} question={field.question} />
-                                    }
-                                    else if(field.type === 'dropdown') {
-                                        return <DropdownField key={index} id={index} answers={answers} handleChange={handleAnswerChange} question={field.question} options={field.options} />
-                                    }
-                                    else if(field.type === 'radio') {
-                                        return <RadioField key={index} id={index} answers={answers} handleChange={handleAnswerChange} question={field.question} options={field.options} />
-                                    }
-                                    else {
-                                        return <CheckboxField key={index} id={index} answers={answers} handleChange={handleCheckboxAnswerChange} question={field.question} options={field.options} />
-                                    }
-                                })}
+                getForm.isLoading ? 
+                    <></> 
+                : 
+                    <>
+                        {
+                            localStorageAvailable && localStorage.getItem(formId) ? 
+                                <h3>Thanks for submitting your answer</h3>
+                                :
+                                (
+                                    <>
+                                        <SectionTitle>{form.title}</SectionTitle>
+                                        <div className="mt-7">
+                                            {form.fields.length && form?.fields?.map((field, index) => {
+                                                if(field.type === 'text') {
+                                                    return <TextField key={index} id={index} answers={answers} handleChange={handleAnswerChange} question={field.question} />
+                                                }
+                                                else if(field.type === 'dropdown') {
+                                                    return <DropdownField key={index} id={index} answers={answers} handleChange={handleAnswerChange} question={field.question} options={field.options} />
+                                                }
+                                                else if(field.type === 'radio') {
+                                                    return <RadioField key={index} id={index} answers={answers} handleChange={handleAnswerChange} question={field.question} options={field.options} />
+                                                }
+                                                else {
+                                                    return <CheckboxField key={index} id={index} answers={answers} handleChange={handleCheckboxAnswerChange} question={field.question} options={field.options} />
+                                                }
+                                            })}
 
-                                <div className="mt-7">
-                                    <Btn handleClick={handleSubmit}>Submit</Btn>
-                                </div>
-                            </div>
-                        </>
-                    )
+                                            <div className="mt-7">
+                                                <Btn handleClick={handleSubmit}>Submit</Btn>
+                                            </div>
+                                        </div>
+                                    </>
+                                )
+                        }
+                    </>
             }
+            
             
         </main>
     )

@@ -51,39 +51,49 @@ const Dashboard: NextPage = () => {
 
   return (
     <main className="ml-16 min-h-screen">
-        {
-            drafts && drafts.length ? (
-                <>       
-                  <SectionTitle>Drafts</SectionTitle>
-                  <div className="mt-10 flex flex-col md:flex-row md:w-[75rem] md:flex-wrap">
-                      {drafts.map((form: Form, i: number) => (
-                          <div key={i} className="mr-20">
-                              <CreatedFormCard index={i} form={form} deleteForm={deleteForm} />
-                          </div>
-                      ))}
-                  </div>
-                </>
-            ) : <></>
-        }
+      {
+        getDrafts.isLoading || getCreatedForms.isLoading ? (
+          <></>
+        ) : (
+          <>
+            {
+                drafts && drafts.length ? (
+                    <>       
+                      <SectionTitle>Drafts</SectionTitle>
+                      <div className="mt-10 flex flex-col md:flex-row md:w-[75rem] md:flex-wrap">
+                          {drafts.map((form: Form, i: number) => (
+                              <div key={i} className="mr-20">
+                                  <CreatedFormCard index={i} form={form} deleteForm={deleteForm} />
+                              </div>
+                          ))}
+                      </div>
+                    </>
+                ) : <></>
+            }
 
-        <SectionTitle>Created Forms</SectionTitle>
-        {createdForms && createdForms.length ? (
-            <div className="mt-10 flex flex-col md:flex-row md:w-[75rem] md:flex-wrap">
-            {createdForms.map((form: Form, i: number) => (
-                  <div key={i} className="mr-20">
-                    <CreatedFormCard index={i} form={form} deleteForm={deleteForm} />
-                  </div>
-                )
-            )}
+            <SectionTitle>Created Forms</SectionTitle>
+            {createdForms && createdForms.length ? (
+                <div className="mt-10 flex flex-col md:flex-row md:w-[75rem] md:flex-wrap">
+                {createdForms.map((form: Form, i: number) => (
+                      <div key={i} className="mr-20">
+                        <CreatedFormCard index={i} form={form} deleteForm={deleteForm} />
+                      </div>
+                    )
+                )}
+                </div>
+            ) :
+              <h2 className="mt-4">No forms created yet</h2>
+            }
+            <div className="mr-10 md:mr-0">
+                <button onClick={addForm} className="bg-yellow w-14 h-14 rounded-full flex items-center justify-center border-black border-3 shadow-std float-right hover:scale-110 transition-all">
+                <Image className="w-12" src={plus_icon} alt="plus icon" />
+                </button>
             </div>
-        ) :
-          <h2 className="mt-4">No forms created yet</h2>
-        }
-        <div className="mr-10 md:mr-0">
-            <button onClick={addForm} className="bg-yellow w-14 h-14 rounded-full flex items-center justify-center border-black border-3 shadow-std float-right hover:scale-110 transition-all">
-            <Image className="w-12" src={plus_icon} alt="plus icon" />
-            </button>
-        </div>
+          </>
+        )
+          
+      }
+
     </main>
   );
 }
