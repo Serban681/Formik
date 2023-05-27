@@ -4,11 +4,9 @@ import { useEffect, useState } from "react";
 import { type Form } from "@/utils/dataStructures"
 import { type FormAnswers } from "@/utils/dataStructures"
 import { Btn } from "@/components/Buttons";
-
 import { toast } from "react-toastify";
-
+import 'react-toastify/dist/ReactToastify.css';
 import { api } from "@/utils/api";
-
 import { useRouter } from "next/router";
 
 interface FormField {
@@ -47,6 +45,12 @@ export default function FormResults() {
 
     const [formAnswers, setFormAnswers] = useState<FormAnswers[]>([])
 
+    const handleShareClick = ()=> {
+        void navigator.clipboard.writeText(window.location.href)
+
+        toast("Link copied to clipboard")
+    }
+
     const handleSendFormClick = () => {
         void navigator.clipboard.writeText(window.location.origin + '/viewform/' + formId)
 
@@ -69,6 +73,10 @@ export default function FormResults() {
                         return <CheckboxField key={index} id={index} answers={formAnswers} formField={field} />
                     }
                 })}
+
+                <div className="mt-7">
+                    <Btn handleClick={() => handleShareClick()}>Share Results</Btn>
+                </div>
 
                 <div className="mt-7">
                     <Btn index={1} handleClick={() => handleSendFormClick()}>Send Form</Btn>
