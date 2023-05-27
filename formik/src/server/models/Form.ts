@@ -1,7 +1,7 @@
 import mongoose from "mongoose"
 
 const FormSchema = new mongoose.Schema({
-    id: {
+    _id: {
         type: mongoose.Schema.Types.ObjectId,
         default: mongoose.Types.ObjectId
     },
