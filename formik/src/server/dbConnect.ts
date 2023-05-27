@@ -32,7 +32,7 @@ async function dbConnect() {
 
     cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
       require('./models/Form')
-    //   require('./models/FormAnswers')
+      require('./models/FormAnswers')
 
       return mongoose;
     });

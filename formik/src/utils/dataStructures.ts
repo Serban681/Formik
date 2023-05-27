@@ -11,3 +11,14 @@ export interface Form {
     isDraft: boolean,
     creator: string
 }
+
+export interface Answer {
+    type: string,
+    answer: string,
+    answers: string[]
+}
+
+export interface FormAnswers {
+    formId: string,
+    answers: Answer[]
+}
