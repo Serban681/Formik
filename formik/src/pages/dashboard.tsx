@@ -19,16 +19,16 @@ const Dashboard: NextPage = () => {
 
   const router = useRouter()
 
-  const [createdForms, setCreatedForms] = useState<Form[]>([])
+    const [drafts, setDrafts] = useState<Form[]>([])
+    const [createdForms, setCreatedForms] = useState<Form[]>([])
 
-  const getCreatedForms = api.forms.getCreatedForms.useQuery(session && session.user && session.user.email || '')
+    const getDrafts = api.forms.getDraftForms.useQuery(session?.user?.email! || '')
+    const getCreatedForms = api.forms.getCreatedForms.useQuery(session?.user?.email! || '')
 
-  useEffect(() => {
-
-    if(getCreatedForms.data)
-        setCreatedForms(getCreatedForms.data)    
-  }, [getCreatedForms.data])
-
+    useEffect(() => {
+        setDrafts(getDrafts.data!)
+        setCreatedForms(getCreatedForms.data!)
+    }, [getDrafts.data!, getCreatedForms.data!])
 
   const addForm = () => {
     router.push('/createform').catch((err) => console.log(err))
@@ -36,7 +36,20 @@ const Dashboard: NextPage = () => {
 
   return (
     <main className="ml-16 min-h-screen">
-
+        {
+            drafts && drafts.length ? (
+                <>
+                    <SectionTitle>Drafts</SectionTitle>
+                    <div className="mt-10 flex flex-col md:flex-row md:w-[75rem] md:flex-wrap">
+                        {drafts.map((form: Form, i: number) => (
+                            <div key={i} className="mr-20">
+                                <CreatedFormCard index={i} form={form} />
+                            </div>
+                        ))}
+                    </div>
+                </>
+            ) : <></>
+        }
         <SectionTitle>Created Forms</SectionTitle>
         {createdForms && createdForms.length ? (
             <div className="mt-10 flex flex-col md:flex-row md:w-[75rem] md:flex-wrap">

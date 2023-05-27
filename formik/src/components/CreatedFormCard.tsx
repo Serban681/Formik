@@ -10,6 +10,10 @@ import {useRouter} from "next/router";
 const CreatedFormCard = ({form, index}:{form: Form, index: number}) => {
     const router = useRouter();
 
+    const goToFormCreatorPage =  () => {
+         router.push(`/updateform/${form._id}`).catch((err) => console.log(err));
+    }
+
     const goToResultsPage = () => {
         router.push(`/formresults/${form._id || ''}`).catch((err) => console.log(err));
     }
@@ -29,10 +33,19 @@ const CreatedFormCard = ({form, index}:{form: Form, index: number}) => {
                 {form.fields?.slice(0, 3).map((field, i) => <li key={i} className="mb-1">{field.question}</li>)}
             </ul>
 
-            <div className="block float-right mt-10 mr-4">  
-                <Btn handleClick={() => goToResultsPage()} index={index % 6}>Responses</Btn>
-            </div>
-
+            {
+                form.isDraft ? (
+                        <div className="block float-right mt-10 mr-4">
+                            <Btn handleClick={() => goToFormCreatorPage()} index={index % 6}>Continue</Btn>
+                        </div>
+                    )
+                    :
+                    (
+                        <div className="block float-right mt-10 mr-4">
+                            <Btn handleClick={() => goToResultsPage()} index={index % 6}>Responses</Btn>
+                        </div>
+                    )
+            }
 
             {/* <div className="block float-right mt-10 mr-4">  
                 <Btn handleClick={() => goToResultsPage()} index={index % 6}>Responses</Btn>
