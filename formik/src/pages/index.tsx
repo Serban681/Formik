@@ -7,6 +7,9 @@ import icon_data from "@/images/icon_data.svg";
 import icon_form from "@/images/icon_form.svg";
 import icon_share from "@/images/icon_share.svg";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
+
+import { api } from "@/utils/api";
 
 const Home: NextPage = () => {
   const router = useRouter();
@@ -14,6 +17,12 @@ const Home: NextPage = () => {
   const handleClick = () => {
     router.push('/signup').catch((err) => console.log(err));
   }
+
+  const h = api.sayHi.useQuery()
+
+  useEffect(() => {
+    console.log(h.data)
+  }, [h.data])
 
   return (
     <div>
